@@ -8,6 +8,7 @@ class FacebookParser(TemplateBot):
     path_to_login_input = '//*[@id="m_login_email"]'
     path_to_password_input = '//*[@id="m_login_password"]'
     path_to_login_button = '//*[@id="u_0_4"]/button'
+    TIME_TO_SCROLL = 600
 
     def parse(self, group_id: str = None) -> list: # 1643910255830661
         self.driver.get(f'https://m.facebook.com/groups/{group_id}#_=_')
@@ -18,7 +19,7 @@ class FacebookParser(TemplateBot):
         self.driver.find_element_by_xpath(self.path_to_login_button).click()
         self.protected_sleep(5.2345678765432345678765434567876543)
 
-        for _ in range(600):
+        for _ in range(self.TIME_TO_SCROLL):
             self.driver.execute_script('scrollTo(0, 1000000000000000)')
             self.protected_sleep(3.5765456789098765456789098765)
 
